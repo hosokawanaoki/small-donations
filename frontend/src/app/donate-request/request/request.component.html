@@ -1,0 +1,129 @@
+    <div class="donate-image">
+        <div class="row">
+        <div class="col-md-5" style="text-align:center;">
+            <img src="assets/dummy/DJT-TP-45-stacked.png">
+            <div style="padding-top:50px; width:400px; margin: auto;">
+                <nb-flip-card [showToggleButton]="false" [flipped]="flipped">
+                <nb-card-front>
+                    <nb-card size="large" style="height: 42rem;"  status="danger">
+                    <nb-card-header>大統領ドナルドJ.トランプの偽物ウェブサイト</nb-card-header>
+                    <nb-card-body style="text-align:left">
+                        <h4>私たちは歴史を作りました</h4>
+                        私たちはアメリカに、大多数の沈黙がもはや沈黙していないことを示しました。私たちは歴史を作りました。私たちは、希望、夢、無限の可能性を実現しました。
+                        私たちはもう一度、国民のための、国民のための政府を作りました。
+                        しかし、選挙中に私たちを止めようとした同じ勢力が私たちの運動を破壊しようとしています。
+                        私たちはメディア、民主党、そして沼地で繁栄する特別な利益と戦い続けなければなりません。
+
+                        <p style="font-weight: bold;margin-top: 20px">アメリカのために戦い続けるために貢献してください。<p>
+                        <div class="amount-no-desc">
+                            <div class="btn conduit-amount-option amount-1 selected" data-amount="25" data-name="amt1">
+                                <button nbButton class="select-money" [ngClass]="isMoney('2500')" (click)="setMoney('2500')">
+                                    <font style="vertical-align: inherit;">2500 円</font>
+                                </button>
+                                <button nbButton class="select-money" [ngClass]="isMoney('5000')" (click)="setMoney('5000')">
+                                    <font style="vertical-align: inherit;">5000 円</font>
+                                </button>
+                                <button nbButton class="select-money" [ngClass]="isMoney('10000')" (click)="setMoney('10000')">
+                                    <font style="vertical-align: inherit;">10000 円</font>
+                                </button>
+                                <button nbButton class="select-money" [ngClass]="isMoney('25000')" (click)="setMoney('25000')">
+                                    <font style="vertical-align: inherit;">25000 円</font>
+                                </button>
+                                <button nbButton class="select-money" [ngClass]="isMoney('50000')" (click)="setMoney('50000')">
+                                    <font style="vertical-align: inherit;">5万 円</font>
+                                </button>
+                                <button nbButton class="select-money" [ngClass]="isMoney('100000')" (click)="setMoney('100000')">
+                                    <font style="vertical-align: inherit;">10万 円</font>
+                                </button>
+                                <button nbButton class="select-money" [ngClass]="isMoney('500000')" (click)="setMoney('500000')">
+                                    <font style="vertical-align: inherit;">50万 円</font>
+                                </button>
+                                <button nbButton class="select-money" [ngClass]="isMoney('5000000')" (click)="setMoney('5000000')">
+                                    <font style="vertical-align: inherit;"> other</font>
+                                </button>
+                            </div>
+                        </div>
+                        <div  style="text-align:center;margin-top: 14px">
+                        あなたの寄付は、ドナルドJ.トランプに利益をもたらします。
+                        </div>
+                        <div  style="text-align:center;margin-top: 14px">
+                            <button nbButton outline fullWidth status="warning" (click)="setDisabled()"  [ngClass]="isDisabled()" >
+                                <nb-icon icon="checkmark-outline" *ngIf="!disabled"></nb-icon>
+                                これを毎月定期的に寄付する
+                            </button>
+                        </div>
+                    </nb-card-body>
+                    <nb-card-footer>
+                        <div style="text-align:center;margin-top: 14px">
+                            <button nbButton fullWidth  status="primary" [disabled]="!money" (click)="toggleView()">
+                                続ける
+                            </button>
+                        </div>
+                    </nb-card-footer>
+                    </nb-card>
+                </nb-card-front>
+                <nb-card-back>
+                    <nb-card size="large" style="height: 42rem;"  status="danger">
+                    <nb-card-header>ユーザー情報登録</nb-card-header>
+                    <nb-card-body>
+                        <form class="form-horizontal">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="label col-sm-3 form-control-label">Eメール</label>
+                                <div class="col-sm-9">
+                                <input type="email" nbInput fullWidth id="inputEmail3" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="label col-sm-3 form-control-label">パスワード</label>
+                                <div class="col-sm-9">
+                                <input type="password" nbInput fullWidth id="inputPassword3" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="offset-sm-3 col-sm-9" style="text-align: left;">
+                                <div class="checkbox">
+                                    <nb-checkbox>パスワードを記憶する</nb-checkbox>
+                                </div>
+                                </div>
+                            </div>
+                        </form>
+                            <div class="form-group row">
+                                <div class="offset-sm-3 col-sm-9"  style="text-align: right;">
+                                    <button nbButton status="success">ログイン</button>
+                                </div>
+                            </div>
+                        <hr>
+                            <div class="form-group row">
+                                <div class="offset-sm-1"  style="text-align: left;">
+                                初めての方ですか？<br>
+                                アカウントを作成してください。
+                                </div>
+                                <div class="offset-sm-3 col-sm-9"  style="text-align: right;">
+                                    <button nbButton status="success">新規作成</button>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="offset-sm-1"  style="text-align: left; margin-top:50px">
+                                
+                                (サイトの構造をお見せするため、一旦ダミーの画像を利用して作成していたのですが、見栄えのいい画像が
+                                ありませんでした<br>
+                                困ったのでstatesから増援に来てもらいました。)
+                                </div>
+                            </div>
+                    </nb-card-body>
+                    <nb-card-footer>
+                        <div  style="text-align:center;margin-top: 14px">
+                            <button nbButton fullWidth  status="primary" [disabled]="!money" (click)="toggleView()">
+                                戻る
+                            </button>
+                        </div>
+                    </nb-card-footer>
+                    </nb-card>
+                </nb-card-back>
+                </nb-flip-card>
+            </div>
+        </div>
+        <div class="col-md-7">
+        </div>
+        </div>
+    </div>

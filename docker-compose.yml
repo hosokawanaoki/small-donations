@@ -1,0 +1,48 @@
+version: "3"
+services:
+    strapi:
+        container_name: strapi
+        image: strapi/strapi
+        environment:
+            DATABASE_CLIENT: mongo
+            DATABASE_NAME: strapi
+            DATABASE_HOST: mongo
+            DATABASE_PORT: 27017
+            DATABASE_USERNAME: strapi
+            DATABASE_PASSWORD: strapi
+        links:
+            - mongo:mongo
+        volumes:
+            - ./backend/app:/srv/app
+        ports:
+            - "1337:1337"
+
+    mongo:
+        container_name: mongo
+        image: mongo
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: strapi
+            MONGO_INITDB_ROOT_PASSWORD: strapi
+        volumes:
+            - ./backend/data/db:/data/db
+        ports:
+            - "27017:27017"
+    angular:
+        container_name: angular
+        build:
+            context: ./docker/angular
+        ports:
+            - "4200:4200"
+        volumes:
+            - ./frontend:/src
+        working_dir: /src
+        tty: true
+    example:
+        container_name: ngx-admin
+        build:
+            context: ./docker/angular
+        ports:
+            - "4201:4200"
+        volumes:
+            - ./ngx-admin:/src
+        working_dir: /src

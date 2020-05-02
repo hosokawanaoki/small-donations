@@ -1,0 +1,38 @@
+@import '../../@theme/styles/themes.scss';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+// $nb-themes: nb-register-theme((
+//   text-basic-color: color-basic-800, // <- we setting color-basic-800 instead of color-basic-1000
+//   text-disabled-color: color-basic-600, // <- and color-basic-600 as instead of color-basic-500
+//   color-success-100: color-success-100,
+// ), default, default);
+
+@include nb-install-component() {
+    div.donate-image{
+        .select-money{
+            background-color: #f78259;
+            margin-left: 6px;
+            margin-top: 6px;
+            width: 70px;
+            color:white;
+        }
+    
+        .donate-clicked{
+            background-color: #eb4559;
+            color:white;
+        }
+        .disabled_button{
+            background-color: rgba(255, 255, 255, 0.24);
+            border-color: rgba(0, 0, 0, 0.5);
+            color:rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    .birth-time{
+        margin-left: 10px;
+        margin-right: 20px;
+    }
+
+}
+  

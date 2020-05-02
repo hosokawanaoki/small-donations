@@ -1,0 +1,123 @@
+.gridmap {
+    display: grid;
+    grid-template:
+      "... ... ... ... ... ... ... ... ... ... ... ... p01 p01 p01 p01" 1fr
+      "... ... ... ... ... ... ... ... ... ... ... ... p01 p01 p01 p01" 1fr
+      "... ... ... ... ... ... ... ... ... ... ... ... p01 p01 p01 p01" 1fr
+      "... ... ... ... ... ... ... ... ... ... ... ... p01 p01 p01 p01" 1fr
+      "... ... ... ... ... ... ... ... ... ... ... ... p01 p01 p01 p01" 1fr
+      "... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ..." 1fr
+      "... ... ... ... ... ... ... ... ... ... ... ... p02 p02 p02 p02" 1fr
+      "... ... ... ... ... ... ... ... ... ... ... ... p05 p05 p03 p03" 1fr
+      "... ... ... ... ... ... ... ... ... ... ... ... p06 p06 p04 p04" 1fr
+      "... ... ... ... ... ... ... ... ... p17 p16 p15 p15 p07 p07 p07" 1fr
+      "p41 p40 p40 p35 p32 p32 p31 p28 p26 p18 p21 p20 p10 p09 p09 p08" 1fr
+      "p42 p43 p44 p35 p34 p34 p33 p28 p26 p25 p21 p20 p11 p11 p11 p08" 1fr
+      "... p43 p45 p38 p38 p37 p37 p27 p29 p24 p23 p20 p19 p13 p13 p12" 1fr
+      "... p46 p45 p39 p39 p36 p36 p30 p30 p24 p23 p22 p22 p14 p14 p12" 1fr
+      "... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ..." 1fr
+      "p47 ... ... ... ... ... ... ... ... ... ... ... ... ... ... ..." 1fr
+      /2fr 2fr 2fr 2fr 1fr 1fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 1fr 1fr 2fr;
+    gap: 2px;
+    grid-gap: 2px;
+    width: 80em;
+    max-width: 100%;
+    height: 30em;
+    margin: 1em 0;
+    padding: 0;
+    input {
+      display: none;
+    }
+  }
+  
+  .pref {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.2em;
+    transition: all 0.2s ease;
+    &:hover, &:active, input:checked + & {
+      font-weight: bold;
+    }
+    a {
+      width: 100%;
+      height: 100%;
+      text-decoration: inherit;
+      color: inherit;
+      border-radius: inherit;
+      display: inherit;
+      align-items: inherit;
+      justify-content: inherit;
+    }
+  
+    $region-color: (
+      hokkaido: hsl(240, 100%, 50%),
+      tohoku  : hsl(195, 100%, 50%),
+      kanto   : hsl(150, 100%, 50%),
+      chubu   : hsl(105, 100%, 50%),
+      kinki   : hsl( 60, 100%, 50%),
+      chugoku : hsl( 15, 100%, 50%),
+      shikoku : hsl(330, 100%, 50%),
+      kyushu  : hsl(285, 100%, 50%)
+    );
+    
+    @each $region, $color in $region-color {
+      &.#{$region} {
+        color: darken($color, 25%);
+        background-color: lighten($color, 40%);
+        border: 1px solid darken($color, 25%);
+        &:hover {
+          color: darken($color, 25%);
+          background-color: lighten($color, 30%);
+          border: 2px solid darken($color, 25%);
+        }
+        &:active, input:checked + & {
+          color: white;
+          background-color: darken($color, 20%);
+          border: 2px solid darken($color, 20%);
+        }
+      }
+    }
+  
+    @for $i from 1 through 9 {
+      &:nth-of-type(#{$i}) { grid-area: p0#{$i}; }
+    }
+    @for $i from 10 through 47 {
+      &:nth-of-type(#{$i}) { grid-area: p#{$i}; }
+    }
+  
+    $outer-radius: 1.2em;
+    
+    // 北海道、沖縄：四隅を角丸に
+    &:nth-of-type(1), &:nth-of-type(47) {
+      border-radius: $outer-radius;
+    }
+    // 青森、石川、山口、愛媛、佐賀：北西を角丸に
+    &:nth-of-type(2), &:nth-of-type(17), &:nth-of-type(35), &:nth-of-type(38), &:nth-of-type(41) {
+      border-top-left-radius: $outer-radius;
+    }
+    // 青森、香川、福岡：北東を角丸に
+    &:nth-of-type(2), &:nth-of-type(37), &:nth-of-type(40) {
+      border-top-right-radius: $outer-radius;
+    }
+    // 千葉、神奈川、三重、徳島、長崎、宮崎：南東を角丸に
+    &:nth-of-type(12), &:nth-of-type(14), &:nth-of-type(24), &:nth-of-type(36), &:nth-of-type(42), &:nth-of-type(45) {
+      border-bottom-right-radius: $outer-radius;
+    }
+    // 千葉、愛知、和歌山、山口、高知、長崎、鹿児島：南西を角丸に
+    &:nth-of-type(12), &:nth-of-type(23), &:nth-of-type(30), &:nth-of-type(35), &:nth-of-type(39), &:nth-of-type(42), &:nth-of-type(46) {
+      border-bottom-left-radius: $outer-radius;
+    }
+  }
+
+
+
+  .map-page nb-card {
+    height: 34rem;
+  }
+
+  nb-user {
+    cursor: pointer;
+  }
