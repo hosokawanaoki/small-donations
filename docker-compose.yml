@@ -16,7 +16,6 @@ services:
             - ./backend/app:/srv/app
         ports:
             - "1337:1337"
-
     mongo:
         container_name: mongo
         image: mongo
@@ -38,8 +37,11 @@ services:
             - ./frontend/node_modules
         working_dir: /src
         tty: true
-        command: npm install
-        # ng serve --host 0.0.0.0
+        environment:
+            NG_CLI_ANALYTICS: "ci"
+        command: >
+            bash -c "npm install &&
+            ng serve --host 0.0.0.0"
     example:
         container_name: ngx-admin
         build:
@@ -49,3 +51,8 @@ services:
         volumes:
             - ./ngx-admin:/src
         working_dir: /src
+        environment:
+            NG_CLI_ANALYTICS: "ci"
+        command: >
+            bash -c "npm install &&
+            ng serve --host 0.0.0.0"

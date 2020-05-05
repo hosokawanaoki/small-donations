@@ -1,8 +1,3 @@
-#目的
-
-
-#プラン
-
 
 基本
 https://strapi.io/blog/build-a-blog-with-angular-js-strapi-and-apollo
@@ -18,3 +13,4 @@ Admin@example.com
 
 Reset password page
 http://0.0.0.0:1337/admin
+
