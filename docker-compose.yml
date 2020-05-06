@@ -42,17 +42,3 @@ services:
         command: >
             bash -c "yarn install &&
             ng serve --host 0.0.0.0"
-    example:
-        container_name: ngx-admin
-        build:
-            context: ./docker/angular
-        ports:
-            - "4201:4200"
-        volumes:
-            - ./ngx-admin:/src
-        working_dir: /src
-        environment:
-            NG_CLI_ANALYTICS: "ci"
-        command: >
-            bash -c "yarn install &&
-            ng serve --host 0.0.0.0"
