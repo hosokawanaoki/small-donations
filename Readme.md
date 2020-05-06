@@ -14,3 +14,4 @@ Admin@example.com
 Reset password page
 http://0.0.0.0:1337/admin
 
+ファイル構成
