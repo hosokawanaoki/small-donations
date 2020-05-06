@@ -40,7 +40,7 @@ services:
         environment:
             NG_CLI_ANALYTICS: "ci"
         command: >
-            bash -c "npm install &&
+            bash -c "yarn install &&
             ng serve --host 0.0.0.0"
     example:
         container_name: ngx-admin
@@ -54,5 +54,5 @@ services:
         environment:
             NG_CLI_ANALYTICS: "ci"
         command: >
-            bash -c "npm install &&
+            bash -c "yarn install &&
             ng serve --host 0.0.0.0"
