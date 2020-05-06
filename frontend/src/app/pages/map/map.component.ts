@@ -13,10 +13,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   data: any = {};
   loading = true;
   errors: any;
-  leftMapCount: any;
-  leftMap: any[];
-  rightMap: any[];
-  fruits: any[];
+  query_data: any;
   private queryMap: Subscription;
   representativesUser: { name: string, title: string, picture?: string }[];
   councillorsUser: { name: string, title: string, picture?: string }[];
@@ -29,13 +26,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         query: ARTICLES_QUERY
       })
       .valueChanges.subscribe(result => {
-        this.data = result.data;
-        this.leftMapCount = Math.ceil(this.data.articles.length / 5);
-        this.leftMap = this.data.articles.slice(0, this.leftMapCount);
-        this.rightMap = this.data.articles.slice(
-          this.leftMapCount,
-          this.data.articles.length
-        );
+        this.query_data = result.data['articles'];
         this.loading = result.loading;
         this.errors = result.errors;
       });
