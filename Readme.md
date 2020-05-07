@@ -9,7 +9,7 @@
   ビルドが実行した後、
   - frontend
   - backend
-  - DB
+  - DB  
   のコンテナが起動する。各クラスタが連携することで開発環境が使用可能となる。
 　クラスタ同士はAPI経由で実行されている。
 
@@ -79,3 +79,7 @@ MAIL: Admin@example.com
 
 ### ファイル構成
   データはbackend/data/db 配下に保存されている。初回にフォルダが生成される。
+
+# ライセンス利用
+  - Nebular
+    Copyright Akveo. All Rights Reserved.
