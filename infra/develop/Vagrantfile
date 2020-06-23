@@ -1,0 +1,38 @@
+# coding: utf-8
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+
+  config.vm.define 'develop' do |dev|
+    dev.vm.box = "ubuntu/bionic64"
+    dev.vm.hostname = 'development'
+    dev.vm.network "private_network",ip: "192.168.13.25"
+    dev.vm.synced_folder "../../src", "/src",
+      :mount_options => ["dmode=777,fmode=777"]
+    dev.vm.provider "virtualbox" do |vbox|
+      vbox.gui = false
+      vbox.cpus = 2
+      vbox.memory = 2048
+    end
+    dev.vm.provision :docker
+    config.vm.provision :docker_compose, compose_version: "1.25.5"
+    config.vm.network :forwarded_port, guest: 27017, host: 27017
+    config.vm.network :forwarded_port, guest: 4200, host: 4200
+    config.vm.provision "shell",
+    run: "always",
+    inline: "cd /src && docker-compose up"
+
+    ## Ansible
+    #
+    dev.vm.provision "ansible_local" do |ansible|
+      ansible.playbook       = "develop.yml"
+      ansible.version        = "latest"
+      ansible.verbose        = false
+      ansible.install        = true
+      ansible.limit          = "develop"
+      ansible.inventory_path = "hosts"
+    end
+  end
+end

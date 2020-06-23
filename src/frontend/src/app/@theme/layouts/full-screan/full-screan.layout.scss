@@ -1,0 +1,17 @@
+@import '../../styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  .menu-sidebar ::ng-deep .scrollable {
+    padding-top: nb-theme(layout-padding-top);
+  }
+
+}
+
+nb-layout-footer {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1040;
+}

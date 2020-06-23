@@ -1,0 +1,22 @@
+- hosts: develop
+  connection: local
+  become: yes
+  gather_facts: True
+
+  tasks:
+    # クラスターの起動
+
+    - name: Install packages
+      apt:
+        name: ["git", "python3", "python3-pip"]
+        state: present
+        update_cache: yes
+    - name: pip3 install
+      pip:
+        name:
+          - docker-compose
+        executable: pip3
+    - name: usermod -aG docker vagrant
+      user:
+        name: vagrant
+        groups: docker

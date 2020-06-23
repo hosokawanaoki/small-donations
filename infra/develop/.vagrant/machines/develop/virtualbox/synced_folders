@@ -1,0 +1,1 @@
+{"virtualbox":{"/src":{"mount_options":["dmode=777,fmode=777","uid=1000","gid=1000"],"guestpath":"/src","hostpath":"/Users/hosokawanaoki/Desktop/work/win-act/src","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/hosokawanaoki/Desktop/work/win-act/infra/develop","disabled":false,"__vagrantfile":true}}}

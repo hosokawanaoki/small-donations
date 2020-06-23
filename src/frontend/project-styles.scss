@@ -1,0 +1,14 @@
+//フルスクリーン画面用。bodyで指定しているので、外部CSSを使用する他ない。
+body.nb-theme-default{
+    nb-layout{
+        div.layout-container{
+            div.content {
+                div.columns {
+                    nb-layout-column.layout-full {
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }  
+}
