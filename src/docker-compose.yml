@@ -2,7 +2,7 @@ version: "3"
 services:
     strapi:
         container_name: strapi
-        image: strapi/strapi
+        image: strapi/strapi:3.0.1
         environment:
             DATABASE_CLIENT: mongo
             DATABASE_NAME: strapi
@@ -28,17 +28,19 @@ services:
             - mongodata:/data
         ports:
             - "27017:27017"
-    # express:
-    #     container_name: mongo-express
-    #     ports:
-    #         - "8081:8081"
-    #     links:
-    #         - mongo:mongo
-    #     environment:
-    #         ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
-    #         ME_CONFIG_MONGODB_PORT: 27017
-    #         ME_CONFIG_MONGODB_SERVER: strapi
-    #     image: mongo-express
+    express:
+        container_name: mongo-express
+        ports:
+            - "8081:8081"
+        restart: always
+        links:
+            - mongo:mongo
+        environment:
+            ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+            ME_CONFIG_MONGODB_PORT: 27017
+            ME_CONFIG_MONGODB_ADMINUSERNAME: strapi
+            ME_CONFIG_MONGODB_ADMINPASSWORD: strapi
+        image: mongo-express
     angular:
         container_name: angular
         build:

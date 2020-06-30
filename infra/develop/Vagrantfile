@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
     dev.vm.box = "ubuntu/bionic64"
     dev.vm.hostname = 'development'
     dev.vm.network "private_network",ip: "192.168.13.25"
-    dev.vm.synced_folder "../../src", "/src",
+    dev.vm.synced_folder "../../src", "/workspace",
       :mount_options => ["dmode=777,fmode=777"]
     dev.vm.provider "virtualbox" do |vbox|
       vbox.gui = false
@@ -20,9 +20,10 @@ Vagrant.configure("2") do |config|
     config.vm.provision :docker_compose, compose_version: "1.25.5"
     config.vm.network :forwarded_port, guest: 27017, host: 27017
     config.vm.network :forwarded_port, guest: 4200, host: 4200
-    config.vm.provision "shell",
-    run: "always",
-    inline: "cd /src && docker-compose up"
+    config.vm.network :forwarded_port, guest: 8081, host: 8081
+    # config.vm.provision "shell",
+    # run: "always",
+    # inline: "cd /src && docker-compose up"
 
     ## Ansible
     #
