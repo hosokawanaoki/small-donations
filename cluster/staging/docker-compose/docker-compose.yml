@@ -3,6 +3,7 @@ services:
     strapi:
         container_name: strapi
         image: strapi/strapi:3.0.1
+        restart: always
         environment:
             DATABASE_CLIENT: mongo
             DATABASE_NAME: strapi
@@ -13,13 +14,14 @@ services:
         links:
             - mongo:mongo
         volumes:
-            - ./backend/app:/srv/app
+            - ../src/backend/app:/srv/app
         ports:
             - "1337:1337"
     mongo:
         container_name: mongo
         build:
-            context: ./docker/mongo
+            context: ../src/docker/mongo
+        restart: always
         tty: true
         environment:
             MONGO_INITDB_ROOT_USERNAME: strapi
@@ -41,21 +43,14 @@ services:
             ME_CONFIG_MONGODB_ADMINUSERNAME: strapi
             ME_CONFIG_MONGODB_ADMINPASSWORD: strapi
         image: mongo-express
-    angular:
-        container_name: angular
-        build:
-            context: ./docker/angular
+    nginx:
+        image: nginx:latest
+        container_name: nginx
+        restart: always
         ports:
-            - "4200:4200"
+            - "8080:80"
         volumes:
-            - ./frontend:/src
-            - ./frontend/node_modules
-        working_dir: /src
-        tty: true
-        environment:
-            NG_CLI_ANALYTICS: "ci"
-        command: >
-            bash -c "yarn install &&
-            ng serve --host 0.0.0.0  --poll=1000"
+            - ../src/nginx/html:/app
+            - ../src/nginx/default.conf:/etc/nginx/conf.d/default.conf
 volumes:
     mongodata:

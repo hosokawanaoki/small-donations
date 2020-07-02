@@ -1,0 +1,49 @@
+- hosts: conohavps
+  become: yes
+  gather_facts: True
+
+  tasks:
+    - name: apt update
+      apt:
+        update_cache: yes
+
+    - name: Update all packages to the latest version
+      apt:
+        upgrade: dist
+
+    - name: Install packages
+      apt:
+        name:
+          - "git"
+          - "python3"
+          - "python3-pip"
+          - "nginx"
+        state: present
+        update_cache: yes
+
+    - name: Add Docker GPG key
+      apt_key: url=https://download.docker.com/linux/ubuntu/gpg
+
+    - name: Add Docker APT repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable
+
+    - name: Install packages
+      apt:
+        name:
+          [
+            "apt-transport-https",
+            "ca-certificates",
+            "curl",
+            "software-properties-common",
+            "nfs-common",
+            "conntrack",
+          ]
+        state: present
+        update_cache: yes
+
+    - name: Install Docker-CE
+      apt:
+        name: docker-ce=18.06.2~ce~3-0~ubuntu
+        state: present
+        update_cache: yes
