@@ -44,13 +44,15 @@ services:
             ME_CONFIG_MONGODB_ADMINPASSWORD: strapi
         image: mongo-express
     nginx:
-        image: nginx:latest
+        build:
+            context: ../src/docker/nginx
         container_name: nginx
         restart: always
         ports:
             - "8080:80"
         volumes:
             - ../src/nginx/html:/app
+            - ../src/nginx/setting:/setting
             - ../src/nginx/default.conf:/etc/nginx/conf.d/default.conf
 volumes:
     mongodata:
