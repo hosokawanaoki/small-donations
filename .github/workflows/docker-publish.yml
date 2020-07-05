@@ -21,16 +21,16 @@ jobs:
 #         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
 #         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
 
-    - name: Install SSH key of target
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        name: id_rsa-target
-        #known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-        config: |                                         # will be appended!
-          Host conoha
-            HostName 118.27.33.240
-            User root
+#     - name: Install SSH key of target
+#       uses: shimataro/ssh-key-action@v2
+#       with:
+#         key: ${{ secrets.SSH_PRIVATE_KEY }}
+#         name: id_rsa-target
+#         #known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+#         config: |
+#           Host conoha
+#             HostName 118.27.33.240
+#             User root
 
     - name: rsync deploy
-      run: rsync -auzrv -e "ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22" ./test222  conoha:/workspace/
+      run: rsync -auzrv -e "ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22" ./test222  118.27.33.240@:/workspace/
