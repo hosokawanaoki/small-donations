@@ -26,7 +26,7 @@ jobs:
       with:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         name: id_rsa-target
-        known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }} # will be appended!
+        known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
 
     - name: rsync deploy
