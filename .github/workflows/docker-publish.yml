@@ -22,4 +22,4 @@ jobs:
         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
 
     - name: rsync deploy
-      run: rsync -auzrv -e "ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 10022" /home/runner/work/small-donations/* root@v118-27-33-240.wrt7.static.cnode.io:/workspace/test
+      run: rsync -auzrv -e "ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 10022" /home/runner/work/small-donations/* root@v118.27.33.240:/workspace/test
