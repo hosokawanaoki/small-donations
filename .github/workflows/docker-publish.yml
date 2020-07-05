@@ -24,5 +24,8 @@ jobs:
               User root
               IdentityFile ~/.ssh/id_rsa
 
+      - name: Install packages
+        run: ls
+
       - name: rsync deploy
         run: rsync ./test222 staging:/workspace/
