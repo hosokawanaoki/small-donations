@@ -33,4 +33,4 @@ jobs:
 #             User root
 
     - name: rsync deploy
-      run: rsync -auzrv -e "ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22" ./test222  118.27.33.240@:/workspace/
+      run: rsync -auzrv -e "ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22" ./test222  root@118.27.33.240:/workspace/
