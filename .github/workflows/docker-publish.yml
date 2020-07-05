@@ -25,4 +25,4 @@ jobs:
               IdentityFile ~/.ssh/id_rsa
 
       - name: rsync deploy
-        run: rsync ./src staging:/workspace/
+        run: rsync -r ./src staging:/workspace/
