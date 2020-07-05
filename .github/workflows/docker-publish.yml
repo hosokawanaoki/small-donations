@@ -10,16 +10,24 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Create SSH key
-      run: |
-        mkdir -p ~/.ssh/
-        echo "$SSH_PRIVATE_KEY" > ../private.key
-        sudo chmod 600 ../private.key
-        echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-      shell: bash
-      env:
-        SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-        SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
+#     - name: Create SSH key
+#       run: |
+#         mkdir -p ~/.ssh/
+#         echo "$SSH_PRIVATE_KEY" > ../private.key
+#         sudo chmod 600 ../private.key
+#         echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+#       shell: bash
+#       env:
+#         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+#         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
+
+    - name: Install SSH key of target
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        name: id_rsa-target
+        known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }} # will be appended!
+
 
     - name: rsync deploy
       run: rsync -auzrv -e "ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22" ./test222  conoha:/workspace/
