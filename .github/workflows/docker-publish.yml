@@ -30,4 +30,4 @@ jobs:
         remote_path: /workspace
         remote_host: 118.27.33.240
         remote_user: root
-        remote_key: ${{ secrets.conoha }}
+        remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
