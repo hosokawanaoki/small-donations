@@ -17,6 +17,4 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: rsync deploy
-        run: rsync -rptgDvz --delete --exclude-from=api/.rsyncignore -e ”ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no” api/ john@example.com:/var/www/app
-      - name: migrate database
-        run: ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no john@example.com ’cd /var/www/app ＆＆ php artisan migrate’
+        run: rsync -auzrv -e "ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22" ./test222  root@118.27.33.240:/workspace/
