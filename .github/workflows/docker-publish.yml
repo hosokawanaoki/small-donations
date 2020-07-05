@@ -21,8 +21,8 @@ jobs:
           config: |
             Host staging
               HostName 118.27.33.240
-              User user-of-target
-              IdentityFile ~/.ssh/id_rsa-target
+              User root
+              IdentityFile ~/.ssh/id_rsa
 
       - name: rsync deploy
         run: rsync ./test222 staging:/workspace/
