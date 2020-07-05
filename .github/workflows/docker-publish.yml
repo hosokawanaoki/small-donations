@@ -26,8 +26,11 @@ jobs:
       with:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         name: id_rsa-target
-        known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-
+        #known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+        config: |                                         # will be appended!
+          Host conoha
+            HostName 118.27.33.240
+            User root
 
     - name: rsync deploy
       run: rsync -auzrv -e "ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22" ./test222  conoha:/workspace/
