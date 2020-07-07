@@ -3,14 +3,14 @@
   小口の政治献金システムをオープンソース化して誰でも簡単に使用できるようにすることを目的としている。
 
 # ディレクトリ構成
-.
-├── infra
-│   ├── develop 開発環境。vagrantで構築されている。
-│   ├── staging ステージング環境。k8sでの実装をテストする。
-│   └── product 本番環境。
-└── src
-    ├── backend srapiでのAPI送信部分
-    └── frontend angularでのGUI側
+.  
+├── infra  
+│   ├── develop 開発環境。vagrantで構築されている。  
+│   ├── staging ステージング環境。k8sでの実装をテストする。  
+│   └── product 本番環境。  
+└── src  
+    ├── backend srapiでのAPI送信部分  
+    └── frontend angularでのGUI側  
 
 
 

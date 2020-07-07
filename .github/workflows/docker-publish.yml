@@ -1,0 +1,28 @@
+name: only master branch
+ 
+on:
+  push:
+    branches:
+      - master
+ 
+jobs:
+  deploy:
+ 
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install SSH key of target
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          name: id_rsa
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          config: |
+            Host staging
+              HostName 118.27.33.240
+              User root
+              IdentityFile ~/.ssh/id_rsa
+
+      - name: rsync deploy
+        run: rsync -r ./src staging:/workspace/
