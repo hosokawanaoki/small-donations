@@ -25,5 +25,4 @@ jobs:
               IdentityFile ~/.ssh/id_rsa
 
       - name: rsync deploy
-        run: rsync -r ./src staging:/workspace/
-        run: rsync -r ./docker-compose.yml staging:/cluster/staging/docker-compose/docker-compose.yml
+        run: rsync -r . staging:/workspace/
