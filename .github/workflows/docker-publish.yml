@@ -25,3 +25,5 @@ jobs:
               IdentityFile ~/.ssh/id_rsa
       - name: rsync deploy
         run: rsync -r . staging:/workspace/
+      - name: docker reload
+        run: ssh staging  "sh /workspace/small-donation/reload.sh"
