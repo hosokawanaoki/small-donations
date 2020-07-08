@@ -26,4 +26,4 @@ jobs:
       - name: rsync deploy
         run: rsync -r . staging:/workspace/
       - name: docker reload
-        run: ssh staging  "sh /workspace/small-donation/reload.sh"
+        run: ssh staging  "sh /workspace/cluster/staging/reload.sh"
