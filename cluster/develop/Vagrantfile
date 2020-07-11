@@ -8,10 +8,9 @@ Vagrant.configure("2") do |config|
   config.vm.define 'develop' do |dev|
     dev.vm.box = "ubuntu/bionic64"
     dev.vm.hostname = 'development'
+    # IP重複注意
     dev.vm.network "private_network",ip: "192.168.13.25"
-    dev.vm.synced_folder "./docker-compose", "/workspace/infra",
-      :mount_options => ["dmode=777,fmode=777"]
-    dev.vm.synced_folder "../../src", "/workspace/src",
+    dev.vm.synced_folder "../../..", "/workspace",
       :mount_options => ["dmode=777,fmode=777"]
     dev.vm.provider "virtualbox" do |vbox|
       vbox.gui = false
@@ -19,10 +18,12 @@ Vagrant.configure("2") do |config|
       vbox.memory = 2048
     end
     dev.vm.provision :docker
-    config.vm.provision :docker_compose, compose_version: "1.25.5"
-    config.vm.network :forwarded_port, guest: 27017, host: 27017
-    config.vm.network :forwarded_port, guest: 4200, host: 4200
-    config.vm.network :forwarded_port, guest: 8081, host: 8081
+    dev.vm.provision :docker_compose, compose_version: "1.25.5"
+    # ポート重複注意
+    dev.vm.network :forwarded_port, id: "ssh", guest: 22, host: 14425
+    dev.vm.network :forwarded_port, guest: 27017, host: 27017
+    dev.vm.network :forwarded_port, guest: 4200, host: 4200
+    dev.vm.network :forwarded_port, guest: 8081, host: 8081
 
     ## Ansible
     #

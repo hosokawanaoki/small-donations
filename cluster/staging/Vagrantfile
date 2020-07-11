@@ -5,7 +5,7 @@
 Vagrant.configure("2") do |config|
 
 
-  config.vm.define 'develop' do |stg|
+  config.vm.define 'staging' do |stg|
     stg.vm.box = "ubuntu/bionic64"
     stg.vm.hostname = 'srageing'
     stg.vm.network "private_network",ip: "192.168.13.27"
@@ -14,7 +14,8 @@ Vagrant.configure("2") do |config|
       vbox.cpus = 2
       vbox.memory = 2048
     end
-
+    # ポート重複注意
+    stg.vm.network :forwarded_port, id: "ssh", guest: 22, host: 14428
     stg.vm.provision "shell", privileged: false, inline: <<-SHELL
       sudo apt-add-repository ppa:ansible/ansible
       sudo apt-get update

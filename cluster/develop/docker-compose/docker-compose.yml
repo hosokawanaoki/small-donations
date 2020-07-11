@@ -14,13 +14,13 @@ services:
         links:
             - mongo:mongo
         volumes:
-            - ../src/backend/app:/srv/app
+            - /workspace/small-donations/src/backend/app:/srv/app
         ports:
             - "1337:1337"
     mongo:
         container_name: mongo
         build:
-            context: ../src/docker/mongo
+            context: /workspace/small-donations/src/docker/mongo
         restart: always
         tty: true
         environment:
@@ -46,13 +46,13 @@ services:
     angular:
         container_name: angular
         build:
-            context: ../src/docker/angular
+            context: /workspace/small-donations/src/docker/angular
         restart: always
         ports:
             - "4200:4200"
         volumes:
-            - ../src/frontend:/src
-            - ../src/frontend/node_modules
+            - /workspace/small-donations/src/frontend:/src
+            - /workspace/small-donations/src/frontend/node_modules
         working_dir: /src
         tty: true
         environment:
