@@ -23,6 +23,7 @@ jobs:
               HostName 118.27.33.240
               User root
               IdentityFile ~/.ssh/id_rsa
-
       - name: rsync deploy
-        run: rsync -r ./src staging:/workspace/
+        run: rsync -r ../ staging:/workspace/
+#       - name: docker reload
+#         run: ssh staging  "sh /workspace/cluster/staging/reload.sh"
