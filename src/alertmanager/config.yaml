@@ -1,0 +1,11 @@
+global:
+  slack_api_url: 'https://hooks.slack.com/services/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'
+    
+route:
+  receiver: 'slack'
+  
+receivers:
+- name: 'slack'
+  slack_configs:
+  - channel: '#small-donations'
+    text: 'test'

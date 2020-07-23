@@ -16,24 +16,26 @@ services:
         volumes:
             - /workspace/small-donations/src/backend/app:/srv/app
         ports:
-            - "1337:1337"
+            - 1337:1337
     mongo:
         container_name: mongo
         build:
             context: /workspace/small-donations/src/docker/mongo
         restart: always
         tty: true
+        user: "0"
         environment:
             MONGO_INITDB_ROOT_USERNAME: strapi
             MONGO_INITDB_ROOT_PASSWORD: strapi
         volumes:
-            - mongodata:/data
+            - /workspace/small-donations/src/mongo:/data
+            - /workspace/small-donations/src/mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
         ports:
-            - "27017:27017"
+            - 27017-27019:27017-27019
     express:
         container_name: mongo-express
         ports:
-            - "8081:8081"
+            - 8081:8081
         restart: always
         links:
             - mongo:mongo
@@ -49,7 +51,7 @@ services:
             context: /workspace/small-donations/src/docker/angular
         restart: always
         ports:
-            - "4200:4200"
+            - 4200:4200
         volumes:
             - /workspace/small-donations/src/frontend:/src
             - /workspace/small-donations/src/frontend/node_modules
@@ -60,5 +62,43 @@ services:
         command: >
             bash -c "yarn install &&
             ng serve --host 0.0.0.0  --poll=1000"
-volumes:
-    mongodata:
+    prometheus:
+        image: prom/prometheus
+        container_name: prometheus
+        hostname: prometheus
+        volumes:
+            - /workspace/small-donations/src/prometheus:/etc/prometheus
+        command: "--config.file=/etc/prometheus/prometheus.yaml"
+        ports:
+            - 9090:9090
+        restart: always
+    exporter:
+        image: prom/node-exporter:latest
+        container_name: exporter
+        hostname: exporter
+        ports:
+            - 9100:9100
+        restart: always
+        volumes:
+            - /proc:/host/proc:ro
+            - /sys:/host/sys:ro
+            - /:/rootfs:ro
+    grafana:
+        image: grafana/grafana
+        container_name: grafana
+        hostname: grafana
+        ports:
+            - 3000:3000
+        volumes:
+            - /workspace/small-donations/src/grafana:/var/lib/grafana
+        restart: always
+    alertmanager:
+        image: prom/alertmanager
+        container_name: alertmanager
+        hostname: alertmanager
+        volumes:
+            - /workspace/small-donations/src/alertmanager:/etc/alertmanager
+        command: "--config.file=/etc/alertmanager/config.yaml"
+        ports:
+            - 9093:9093
+        restart: always

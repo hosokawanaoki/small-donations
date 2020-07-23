@@ -2,11 +2,20 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+module VagrantPlugins
+  module GuestLinux
+    class Plugin < Vagrant.plugin("2")
+      guest_capability("linux", "change_host_name") { Cap::ChangeHostName }
+      guest_capability("linux", "configure_networks") { Cap::ConfigureNetworks }
+    end
+  end
+end
+
 Vagrant.configure("2") do |config|
 
-
+  config.disksize.size = '25GB'
   config.vm.define 'develop' do |dev|
-    dev.vm.box = "ubuntu/bionic64"
+    dev.vm.box = "ailispaw/barge"
     dev.vm.hostname = 'development'
     # IP重複注意
     dev.vm.network "private_network",ip: "192.168.13.25"
@@ -15,25 +24,25 @@ Vagrant.configure("2") do |config|
     dev.vm.provider "virtualbox" do |vbox|
       vbox.gui = false
       vbox.cpus = 2
-      vbox.memory = 2048
+      vbox.memory = 4096
     end
-    dev.vm.provision :docker
-    dev.vm.provision :docker_compose, compose_version: "1.25.5"
     # ポート重複注意
     dev.vm.network :forwarded_port, id: "ssh", guest: 22, host: 14425
     dev.vm.network :forwarded_port, guest: 27017, host: 27017
     dev.vm.network :forwarded_port, guest: 4200, host: 4200
     dev.vm.network :forwarded_port, guest: 8081, host: 8081
+    dev.vm.network :forwarded_port, guest: 9090, host: 9090
+    dev.vm.network :forwarded_port, guest: 9100, host: 9100
+    dev.vm.network :forwarded_port, guest: 3000, host: 3000
+    dev.vm.network :forwarded_port, guest: 9093, host: 9093
 
-    ## Ansible
-    #
-    dev.vm.provision "ansible_local" do |ansible|
-      ansible.playbook       = "develop.yml"
-      ansible.version        = "latest"
-      ansible.verbose        = false
-      ansible.install        = true
-      ansible.limit          = "develop"
-      ansible.inventory_path = "hosts"
-    end
+    dev.vm.provision :shell, run: "always", :inline => <<-EOT
+      sudo /etc/init.d/docker restart latest
+      docker version
+      wget -L https://github.com/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m`
+      mv docker-compose-`uname -s`-`uname -m` /opt/bin/docker-compose
+      chmod +x /opt/bin/docker-compose
+      chown root:root /opt/bin/docker-compose
+    EOT
   end
 end

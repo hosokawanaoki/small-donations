@@ -1,0 +1,20 @@
+groups:
+  - name: my-group-name
+    interval: 30s   # defaults to global interval
+    rules:
+    - record: instance:errors:rate5m
+      expr: rate(errors_total[5m])
+    - record: instance:requests:rate5m
+      expr: rate(requests_total[5m])
+    - alert: HighErrors
+      # Expressions remain PromQL as before and can be spread over
+      # multiple lines via YAML’s multi-line strings.
+      expr: |
+        sum without(instance) (instance:errors:rate5m)
+        / 
+        sum without(instance) (instance:requests:rate5m)
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        description: "stuff's happening with {{ $labels.service }}"      
