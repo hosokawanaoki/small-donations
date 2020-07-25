@@ -51,3 +51,6 @@ env.yml
 
 *.log
 .vagrant
+
+src/mongo/configdb
+src/mongo/db

@@ -23,13 +23,12 @@ services:
             context: /workspace/small-donations/src/docker/mongo
         restart: always
         tty: true
-        user: "0"
         environment:
             MONGO_INITDB_ROOT_USERNAME: strapi
             MONGO_INITDB_ROOT_PASSWORD: strapi
         volumes:
-            - /workspace/small-donations/src/mongo:/data
-            - /workspace/small-donations/src/mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+            - /workspace/small-donations/src/mongo/db:/data/db
+            - /workspace/small-donations/src/mongo/configdb:/data/configdb
         ports:
             - 27017-27019:27017-27019
     express:
@@ -87,6 +86,7 @@ services:
         image: grafana/grafana
         container_name: grafana
         hostname: grafana
+        user: "1000" # dockerの起動ユーザーに合わせる
         ports:
             - 3000:3000
         volumes:
