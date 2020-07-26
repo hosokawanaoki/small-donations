@@ -52,5 +52,5 @@ env.yml
 *.log
 .vagrant
 
-src/mongo/configdb
-src/mongo/db
+app/src/mongo/configdb
+app/src/mongo/db

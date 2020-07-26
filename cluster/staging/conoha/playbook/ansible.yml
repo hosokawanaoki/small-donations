@@ -2,7 +2,7 @@
   become: yes
   gather_facts: True
   vars_files:
-    - env.yml
+    - ./secret/env.yml
   tasks:
     - name: apt update
       apt:

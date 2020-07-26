@@ -1,0 +1,19 @@
+version: "3"
+services:
+    angular:
+        container_name: angular
+        build:
+            context: ../docker/angular
+        restart: always
+        ports:
+            - 4200:4200
+        volumes:
+            - ../src/frontend:/src
+            - ../src/frontend/node_modules
+        working_dir: /src
+        tty: true
+        environment:
+            NG_CLI_ANALYTICS: "ci"
+        command: >
+            bash -c "yarn install &&
+            ng serve --host 0.0.0.0  --poll=1000"

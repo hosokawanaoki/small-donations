@@ -14,21 +14,21 @@ services:
         links:
             - mongo:mongo
         volumes:
-            - /workspace/small-donations/src/backend/app:/srv/app
+            - ../src/backend/app:/srv/app
         ports:
             - 1337:1337
     mongo:
         container_name: mongo
         build:
-            context: /workspace/small-donations/src/docker/mongo
+            context: ../docker/mongo
         restart: always
         tty: true
         environment:
             MONGO_INITDB_ROOT_USERNAME: strapi
             MONGO_INITDB_ROOT_PASSWORD: strapi
         volumes:
-            - /workspace/small-donations/src/mongo/db:/data/db
-            - /workspace/small-donations/src/mongo/configdb:/data/configdb
+            - ../src/mongo/db:/data/db
+            - ../src/mongo/configdb:/data/configdb
         ports:
             - 27017-27019:27017-27019
     express:
@@ -47,13 +47,13 @@ services:
     angular:
         container_name: angular
         build:
-            context: /workspace/small-donations/src/docker/angular
+            context: ../docker/angular
         restart: always
         ports:
             - 4200:4200
         volumes:
-            - /workspace/small-donations/src/frontend:/src
-            - /workspace/small-donations/src/frontend/node_modules
+            - ../src/frontend:/src
+            - ../src/frontend/node_modules
         working_dir: /src
         tty: true
         environment:
@@ -66,7 +66,7 @@ services:
         container_name: prometheus
         hostname: prometheus
         volumes:
-            - /workspace/small-donations/src/prometheus:/etc/prometheus
+            - ../src/prometheus:/etc/prometheus
         command: "--config.file=/etc/prometheus/prometheus.yaml"
         ports:
             - 9090:9090
@@ -90,14 +90,14 @@ services:
         ports:
             - 3000:3000
         volumes:
-            - /workspace/small-donations/src/grafana:/var/lib/grafana
+            - ../src/grafana:/var/lib/grafanad
         restart: always
     alertmanager:
         image: prom/alertmanager
         container_name: alertmanager
         hostname: alertmanager
         volumes:
-            - /workspace/small-donations/src/alertmanager:/etc/alertmanager
+            - ../src/alertmanager:/etc/alertmanager
         command: "--config.file=/etc/alertmanager/config.yaml"
         ports:
             - 9093:9093

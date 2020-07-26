@@ -6,7 +6,7 @@
   git clone 後　以下のコマンドを実行する
 
   ```
-    docker-compose up 
+    docker-compose -f docker-compose.yml -f docker-compose.local.yml up 
   ```
 
   ビルドが実行した後、
