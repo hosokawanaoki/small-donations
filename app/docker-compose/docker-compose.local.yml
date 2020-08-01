@@ -1,3 +1,4 @@
+# docker-compose -f docker-compose.yml -f docker-compose.local.yml up
 version: "3"
 services:
     angular:
@@ -11,9 +12,9 @@ services:
             - ../src/frontend:/src
             - ../src/frontend/node_modules
         working_dir: /src
+        user: "1000:1000"
         tty: true
         environment:
             NG_CLI_ANALYTICS: "ci"
         command: >
-            bash -c "yarn install &&
-            ng serve --host 0.0.0.0  --poll=1000"
+            bash -c "yarn install && npm run start"

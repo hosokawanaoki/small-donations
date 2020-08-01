@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "importHelpers": true,
     "module": "esnext",
     "outDir": "./dist/out-tsc",
@@ -22,6 +23,29 @@
       {
         "name": "tslint-language-service"
       }
-    ]
+    ],
+    "paths": {
+      "@entities/*": [
+        "src/app/entities/*"
+      ],
+      "@guards/*": [
+        "src/app/guards/*"
+      ],
+      "@services/*": [
+        "src/app/services/*"
+      ],
+      "@components/*": [
+        "src/app/components/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@configs/*": [
+        "src/configs/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ]
+    }
   }
 }
