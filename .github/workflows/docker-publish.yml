@@ -22,7 +22,7 @@ jobs:
               HostName 118.27.33.240
               User root
               IdentityFile ~/.ssh/id_rsa
-      - name: rsync deploy
+      - name: source deploy
         run: ssh staging  "git -C /workspace/small-donations pull"
-#       - name: docker reload
-#         run: ssh staging  "sh /workspace/cluster/staging/reload.sh"
+      - name: docker rebuild
+        run: ssh staging  "docker-compose -f /workspace/small-donations/app/docker-compose/docker-compose.yml -f /workspace/small-donations/app/docker-compose/docker-compose.staging.yml up "
