@@ -1,15 +1,14 @@
 name: only master branch
- 
+
 on:
   push:
     branches:
       - master
- 
+
 jobs:
   deploy:
- 
     runs-on: ubuntu-latest
- 
+
     steps:
       - uses: actions/checkout@v2
       - name: Install SSH key of target
@@ -24,6 +23,6 @@ jobs:
               User root
               IdentityFile ~/.ssh/id_rsa
       - name: rsync deploy
-        run: ssh staging  "sh git -C /workspace/small-donations pull"
+        run: ssh staging  "git -C /workspace/small-donations pull"
 #       - name: docker reload
 #         run: ssh staging  "sh /workspace/cluster/staging/reload.sh"

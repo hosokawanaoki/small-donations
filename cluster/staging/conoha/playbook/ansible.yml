@@ -44,13 +44,13 @@
 
     - name: create group
       group: name={{usergroup.group.name}} gid={{usergroup.group.gid}}
-      
+
     - name: add users that join to group (wheel and usergroup)
       user: name={{usergroup.user.name}} shell=/bin/bash uid={{usergroup.user.uid}} state=present password={{usergroup.user.password}} groups={{usergroup.user.group}}
-    
+
     - name: user join to other group
       user: name={{usergroup.user.name}} append=yes groups={{usergroup.group.name}}
-    
+
     - name: ~/.ssh for users exist
       file: path="/home/{{usergroup.user.name}}/.ssh" state=directory owner={{usergroup.user.name}} group={{usergroup.user.group}} mode=0700
 
@@ -68,5 +68,5 @@
 
     - name: usermod -aG docker
       user:
-        name: hosokawa
+        name: { { usergroup.user.name } }
         groups: docker

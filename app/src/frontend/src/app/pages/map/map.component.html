@@ -1,4 +1,3 @@
-
 <div class="map-page">
   <app-nav></app-nav>
   <div>
@@ -69,15 +68,24 @@
               <h5>衆議院</h5>
             </nb-list-item>
             <nb-list-item *ngFor="let user of representativesUser">
-
-              <nb-user routerLink="/donate/request" [name]="user.name" [title]="user.title" [picture]="user.picture">
+              <nb-user
+                routerLink="/donate/request"
+                [name]="user.name"
+                [title]="user.title"
+                [picture]="user.picture"
+              >
               </nb-user>
             </nb-list-item>
             <nb-list-item>
               <h5>参議院</h5>
             </nb-list-item>
             <nb-list-item *ngFor="let user of councillorsUser">
-              <nb-user routerLink="/donate/request" [name]="user.name" [title]="user.title" [picture]="user.picture">
+              <nb-user
+                routerLink="/donate/request"
+                [name]="user.name"
+                [title]="user.title"
+                [picture]="user.picture"
+              >
               </nb-user>
             </nb-list-item>
           </nb-list>
@@ -85,9 +93,9 @@
       </div>
     </div>
     <div>
-      <div *ngFor="let article of query_data" style="display:none">
+      <div *ngFor="let article of query_data" style="display: none;">
         API送受信テスト　backendとの接続の確認のみ
-        {{article.id}}
+        {{ article.id }}
         <div>
           <div *ngIf="article.image">
             <img
@@ -100,4 +108,4 @@
       </div>
     </div>
   </div>
-</div>  
+</div>
