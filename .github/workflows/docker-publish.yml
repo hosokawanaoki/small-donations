@@ -24,5 +24,3 @@ jobs:
               IdentityFile ~/.ssh/id_rsa
       - name: source deploy
         run: ssh staging  "git -C /workspace/small-donations pull"
-      - name: docker rebuild
-        run: ssh staging  "docker-compose -f /workspace/small-donations/app/docker-compose/docker-compose.yml -f /workspace/small-donations/app/docker-compose/docker-compose.staging.yml restart -d "

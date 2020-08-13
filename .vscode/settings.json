@@ -1,5 +1,27 @@
 {
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe",
-  "git.autofetch": true,
-  "editor.formatOnSave": true
+  // Controls visibility of line numbers
+  "editor.lineNumbers": "on",
+  // Controls the rendering size of tabs in characters. Accepted values: "auto", 2, 4, 6, etc. If set to "auto", the value will be guessed when a file is opened.
+  "editor.tabSize": 2,
+  // Controls if the editor will insert spaces for tabs. Accepted values:  "auto", true, false. If set to "auto", the value will be guessed when a file is opened.
+  "editor.insertSpaces": true,
+  // Controls whether the editor should render whitespace characters
+  "editor.renderWhitespace": "all",
+  //-------- Files configuration --------
+  // Configure glob patterns for excluding files and folders.
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.DS_Store": true
+  },
+  // The default character set encoding to use when reading and writing files.
+  "files.encoding": "utf8",
+  //-------- Search configuration --------
+  // Configure glob patterns for excluding files and folders in searches. Inherits all glob patterns from the file.exclude setting.
+  "search.exclude": {
+    "**/node_modules": true
+  },
+  // Controls format
+  "editor.formatOnSave": true,
+  "tslint.autoFixOnSave": true
 }

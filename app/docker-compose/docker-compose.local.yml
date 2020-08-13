@@ -1,20 +1,20 @@
 # docker-compose -f docker-compose.yml -f docker-compose.local.yml up
 version: "3"
 services:
-    angular:
-        container_name: angular
-        build:
-            context: ../docker/angular
-        restart: always
-        ports:
-            - 4200:4200
-        volumes:
-            - ../src/frontend:/src
-            - ../src/frontend/node_modules
-        working_dir: /src
-        user: "1000:1000"
-        tty: true
-        environment:
-            NG_CLI_ANALYTICS: "ci"
-        command: >
-            bash -c "yarn install && npm run start"
+  angular:
+    container_name: angular
+    build:
+      context: ../docker/angular
+    restart: always
+    ports:
+      - 4201:4200
+    volumes:
+      - ../src/frontend:/src
+      - ../src/frontend/node_modules
+    working_dir: /src
+    user: "1000:1000"
+    tty: true
+    environment:
+      NG_CLI_ANALYTICS: "ci"
+    command: >
+      bash -c "yarn install && npm run start"
